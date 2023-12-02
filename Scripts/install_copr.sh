@@ -12,6 +12,7 @@ else
     # swww & swaylock-effects
     sudo dnf copr enable -y trs-sod/swaylock-effects
     sudo dnf copr enable -y alebastr/sway-extras
+    sudo dnf copr enable -y aeiro/nwg-shell
 
     # grimblast
     sudo wget https://raw.githubusercontent.com/hyprwm/contrib/main/grimblast/grimblast -O /usr/bin/grimblast
