@@ -48,8 +48,10 @@ if [ `echo $pkg_dnf | wc -w` -gt 0 ]
     sudo dnf install -y $pkg_dnf
 fi
 
-# python-pyamdgpuinfo
-pip install pyamdgpuinfo
+if [ $(uname -m) != "aarch64" ]
+    # python-pyamdgpuinfo
+    pip install pyamdgpuinfo
+fi
 
 # oh-my-zsh-git
 git clone https://github.com/ohmyzsh/ohmyzsh.git
