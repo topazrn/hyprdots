@@ -28,22 +28,24 @@ https://github.com/prasanthrangan/hyprdots/assets/106020512/c995699a-299c-4a8e-9
 
 ## Installation
 
-The installation script is made for Arch, but **may** work on some Arch based distros with **systemd**.
+The installation script is a port made for Fedora x86_64 (typical linux desktop) and aarch64 (Macbook M2 Air), but **may** work on distros with **systemd** and **dnf**.
+For Arch, please refer the original **prasanthrangan**'s version [here](https://github.com/prasanthrangan/hyprdots).
 For Debian, please refer **Senshi111**'s version [here](https://github.com/Senshi111/debian-hyprland-hyprdots).
 Checkout **Ksk**'s [video](https://www.youtube.com/watch?v=mb8h1-LB9K0) for full installation walkthrough.
 
 > [!IMPORTANT]
+> **Not tested on Fedora.**
 > Install script will auto-detect nvidia card and install nvidia-dkms drivers for your kernel.
 > So please ensure that your Nvidia card supports [dkms](https://wiki.archlinux.org/title/NVIDIA) drivers and hyprland.
 
 > [!CAUTION]
 > The script modifies your grub config to enable Nvidia drm and theme
 
-After minimal Arch install (with grub and systemd), clone and execute -
+After minimal Fedora install (with grub and systemd), clone and execute -
 
 ```shell
-pacman -Sy git
-git clone --depth 1 https://github.com/prasanthrangan/hyprdots ~/Hyprdots
+sudo dnf install -y git
+git clone --depth 1 https://github.com/topazrn/hyprdots-fedora ~/Hyprdots
 cd ~/Hyprdots/Scripts
 ./install.sh
 ```
