@@ -19,7 +19,7 @@ else
     sudo chmod +x /usr/bin/grimblast
 
     # cliphist
-    case uname -a in
+    case $(uname -m) in
         x86_64) 
             cliphistarch="amd64" ;;
         aarch64) 
