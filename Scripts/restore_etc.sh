@@ -38,7 +38,7 @@ fi
 
 
 # grub
-if pkg_installed grub
+if pkg_installed grub2-common
     then
 
     if [ ! -f /etc/default/grub.t2.bkp ] && [ ! -f /boot/grub/grub.t2.bkp ]
