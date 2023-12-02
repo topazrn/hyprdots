@@ -41,7 +41,7 @@ fi
 if pkg_installed grub2-common
     then
 
-    if [ ! -f /etc/default/grub.t2.bkp ] && [ ! -f /boot/grub/grub.t2.bkp ]
+    if [ ! -f /etc/default/grub.t2.bkp ] && [ ! -f /boot/grub2/grub.t2.bkp ]
         then
         echo "configuring grub..."
         sudo cp /etc/default/grub /etc/default/grub.t2.bkp
@@ -58,8 +58,8 @@ if pkg_installed grub2-common
         /^#GRUB_THEME=/c\GRUB_THEME=\"/usr/share/grub/themes/pochita/theme.txt\"
         /^#GRUB_SAVEDEFAULT=true/c\GRUB_SAVEDEFAULT=true" /etc/default/grub
 
-        sudo cp /boot/grub/grub.cfg /boot/grub/grub.t2.bkp
-        sudo grub-mkconfig -o /boot/grub/grub.cfg
+        sudo cp /boot/grub2/grub.cfg /boot/grub2/grub.t2.bkp
+        sudo grub-mkconfig -o /boot/grub2/grub.cfg
     fi
 
 else
