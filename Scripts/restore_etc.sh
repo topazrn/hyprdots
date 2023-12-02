@@ -51,7 +51,12 @@ if pkg_installed grub2-common
 
         if nvidia_detect
             then
-            sudo sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/c\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet splash nvidia_drm.modeset=1\"" /etc/default/grub
+            sudo sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/c\GRUB_CMDLINE_LINUX_DEFAULT=\"rootflags=subvol=root loglevel=3 quiet splash nvidia_drm.modeset=1\"" /etc/default/grub
+        fi
+
+        if apple_detect
+            then
+            sudo sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/c\GRUB_CMDLINE_LINUX_DEFAULT=\"rootflags=subvol=root loglevel=3 quiet splash apple_dcp.show_notch=1\"" /etc/default/grub
         fi
 
         sudo sh -c "echo 'GRUB_THEME=\"/usr/share/grub/themes/pochita/theme.txt\"' >> /etc/default/grub"
