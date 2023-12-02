@@ -25,6 +25,7 @@ if pkg_installed sddm
         sudo touch /etc/sddm.conf.d/kde_settings.conf
         sudo cp /etc/sddm.conf.d/kde_settings.conf /etc/sddm.conf.d/kde_settings.t2.bkp
         sudo cp /usr/share/sddm/themes/corners/kde_settings.conf /etc/sddm.conf.d/
+        sudo systemctl set-default graphical.target
     fi
 
     if [ ! -f /usr/share/sddm/faces/${USER}.face.icon ] && [ -f ${CloneDir}/Source/misc/${USER}.face.icon ] ; then
