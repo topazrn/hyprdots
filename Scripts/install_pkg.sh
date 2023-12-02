@@ -48,8 +48,9 @@ if [ `echo $pkg_dnf | wc -w` -gt 0 ]
     sudo dnf install -y $pkg_dnf
 fi
 
+# python-pyamdgpuinfo
 if [ $(uname -m) != "aarch64" ]
-    # python-pyamdgpuinfo
+    then
     pip install pyamdgpuinfo
 fi
 
