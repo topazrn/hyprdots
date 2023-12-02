@@ -27,7 +27,7 @@ pkg_installed()
 {
     local PkgIn=$1
 
-    if pacman -Qi $PkgIn &> /dev/null
+    if apt info nstalled $PkgIn &> /dev/null
     then
         #echo "${PkgIn} is already installed..."
         return 0
@@ -37,23 +37,12 @@ pkg_installed()
     fi
 }
 
-get_aurhlpr()
-{
-    if pkg_installed yay
-    then
-        aurhlpr="yay"
-    elif pkg_installed paru
-    then
-        aurhlpr="paru"
-    fi
-}
-
 check(){
     local Pkg_Dep=$(for PkgIn in "$@"; do ! pkg_installed $PkgIn && echo "$PkgIn"; done)
 
 if [ -n "$Pkg_Dep" ]; then echo -e "$0 Dependencies:\n$Pkg_Dep"
     read -p "ENTER to install  (Other key: Cancel): " ans
-    if [ -z "$ans" ]; then get_aurhlpr ; $aurhlpr -S $Pkg_Dep
+    if [ -z "$ans" ]; then sudo dnf install -y $Pkg_Dep
     else echo "Skipping installation of packages" ;exit 1
     fi
 fi

@@ -10,9 +10,7 @@ ScrDir=`dirname $(realpath $0)`
 source $ScrDir/globalcontrol.sh
 
 # Check for updates
-get_aurhlpr
-aur=`${aurhlpr} -Qua | wc -l`
-ofc=`checkupdates | wc -l`
+ofc=`dnf check-update | wc -l`
 
 # Check for flatpak updates
 if pkg_installed flatpak ; then
@@ -25,17 +23,17 @@ else
 fi
 
 # Calculate total available updates
-upd=$(( ofc + aur + fpk ))
+upd=$(( ofc + fpk ))
 
 # Show tooltip
 if [ $upd -eq 0 ] ; then
     echo "{\"text\":\"$upd\", \"tooltip\":\" Packages are up to date\"}"
 else
-    echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Official $ofc\n󱓾 AUR $aur$fpk_disp\"}"
+    echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Official $ofc\"}"
 fi
 
 # Trigger upgrade
 if [ "$1" == "up" ] ; then
-    kitty --title systemupdate sh -c "${aurhlpr} -Syu $fpk_exup"
+    kitty --title systemupdate sh -c "sudo dnf upgrade $fpk_exup"
 fi
 
