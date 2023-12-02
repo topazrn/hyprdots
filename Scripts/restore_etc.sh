@@ -45,6 +45,7 @@ if pkg_installed grub2-common
         then
         echo "configuring grub..."
         sudo cp /etc/default/grub /etc/default/grub.t2.bkp
+        sudo mkdir /usr/share/grub/themes/
         sudo tar -xzf ${CloneDir}/Source/arcs/Grub_Pochita.tar.gz -C /usr/share/grub/themes/
 
         if nvidia_detect
