@@ -42,7 +42,7 @@ fi
 if pkg_installed grub2-common
     then
 
-    if [ ! -f /etc/default/grub.backup ] && [ ! -f /etc/grub2-efi.cfg.backup ]
+    if [ ! -f /etc/default/grub.backup ] && [ ! -f /etc/grub2.cfg.backup ]
         then
         echo "configuring grub..."
         sudo cp /etc/default/grub /etc/default/grub.backup
@@ -61,8 +61,9 @@ if pkg_installed grub2-common
 
         sudo sh -c "echo 'GRUB_THEME=\"/usr/share/grub/themes/pochita/theme.txt\"' >> /etc/default/grub"
 
-        sudo cp /etc/grub2-efi.cfg /etc/grub2-efi.cfg.backup
-        sudo grub2-mkconfig -o /etc/grub2-efi.cfg
+        sudo cp /etc/grub2.cfg /etc/grub2.cfg.backup
+        sudo grub2-mkconfig -o /etc/grub2.cfg
+        sudo sh -c "cat /etc/grub2.cfg > /etc/grub2-efi.cfg"
     fi
 
 else
