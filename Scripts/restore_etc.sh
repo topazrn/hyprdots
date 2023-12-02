@@ -59,7 +59,7 @@ if pkg_installed grub2-common
         /^#GRUB_SAVEDEFAULT=true/c\GRUB_SAVEDEFAULT=true" /etc/default/grub
 
         sudo cp /boot/grub2/grub.cfg /boot/grub2/grub.t2.bkp
-        sudo grub-mkconfig -o /boot/grub2/grub.cfg
+        sudo grub2-mkconfig -o /boot/grub2/grub.cfg
     fi
 
 else
