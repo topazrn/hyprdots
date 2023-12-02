@@ -52,7 +52,13 @@ fi
 pip install pyamdgpuinfo
 
 # oh-my-zsh-git
-ZSH=/usr/share/oh-my-zsh sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+git clone https://github.com/ohmyzsh/ohmyzsh.git
+cd ohmyzsh
+sudo mkdir -p /usr/share/oh-my-zsh
+sudo install -D -m644 LICENSE.txt /usr/share/licenses/ohmyzsh/LICENSE
+sudo cp -r * /usr/share/oh-my-zsh/
+cd ..
+sudo rm -rf ohmyzsh
 
 # zsh-theme-powerlevel10k-git
 sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /usr/share/zsh-theme-powerlevel10k/
