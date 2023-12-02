@@ -19,7 +19,15 @@ else
     sudo chmod +x /usr/bin/grimblast
 
     # cliphist
-    sudo wget https://github.com/sentriz/cliphist/releases/download/v0.4.0/v0.4.0-linux-amd64 -O /usr/bin/cliphist
+    case uname -a in
+        x86_64) 
+            cliphistarch="amd64" ;;
+        aarch64) 
+            cliphistarch="arm" ;;
+        *)
+            cliphistarch="386" ;;
+    esac
+    sudo wget "https://github.com/sentriz/cliphist/releases/download/v0.4.0/v0.4.0-linux-$cliphistarch" -O /usr/bin/cliphist
     sudo chmod +x /usr/bin/cliphist
 
     # vscode
