@@ -37,34 +37,31 @@ else
 fi
 
 
-# grub WIP
-# if pkg_installed grub2-common
-#     then
+# grub
+if pkg_installed grub2-common
+    then
 
-#     if [ ! -f /etc/default/grub.t2.bkp ] && [ ! -f /boot/grub2/grub.t2.bkp ]
-#         then
-#         echo "configuring grub..."
-#         sudo cp /etc/default/grub /etc/default/grub.t2.bkp
-#         sudo mkdir /usr/share/grub/themes/
-#         sudo tar -xzf ${CloneDir}/Source/arcs/Grub_Pochita.tar.gz -C /usr/share/grub/themes/
+    if [ ! -f /etc/default/grub.backup ] && [ ! -f /etc/grub2-efi.cfg.backup ]
+        then
+        echo "configuring grub..."
+        sudo cp /etc/default/grub /etc/default/grub.backup
+        sudo mkdir /usr/share/grub/themes/
+        sudo tar -xzf ${CloneDir}/Source/arcs/Grub_Pochita.tar.gz -C /usr/share/grub/themes/
 
-#         if nvidia_detect
-#             then
-#             sudo sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/c\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet splash nvidia_drm.modeset=1\"" /etc/default/grub
-#         fi
+        if nvidia_detect
+            then
+            sudo sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/c\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet splash nvidia_drm.modeset=1\"" /etc/default/grub
+        fi
 
-#         sudo sed -i "/^GRUB_DEFAULT=/c\GRUB_DEFAULT=saved
-#         /^GRUB_GFXMODE=/c\GRUB_GFXMODE=1280x1024x32,auto
-#         /^#GRUB_THEME=/c\GRUB_THEME=\"/usr/share/grub/themes/pochita/theme.txt\"
-#         /^#GRUB_SAVEDEFAULT=true/c\GRUB_SAVEDEFAULT=true" /etc/default/grub
+        sudo echo "GRUB_THEME=\"/usr/share/grub/themes/pochita/theme.txt\"" >> /etc/default/grub
 
-#         sudo cp /boot/grub2/grub.cfg /boot/grub2/grub.t2.bkp
-#         sudo grub2-mkconfig -o /boot/grub2/grub.cfg
-#     fi
+        sudo cp /etc/grub2-efi.cfg /etc/grub2-efi.cfg.backup
+        sudo grub2-mkconfig -o /etc/grub2-efi.cfg
+    fi
 
-# else
-#     echo "WARNING: grub is not installed..."
-# fi
+else
+    echo "WARNING: grub is not installed..."
+fi
 
 
 # dolphin
