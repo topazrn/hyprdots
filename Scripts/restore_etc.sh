@@ -75,17 +75,3 @@ else
     echo "WARNING: dolphin is not installed..."
 fi
 
-
-# zsh
-if pkg_installed zsh
-    then
-
-    if [ "$SHELL" != "/usr/bin/zsh" ] ; then
-        echo "changing shell to zsh..."
-        chsh -s $(which zsh)
-    fi
-
-else
-    echo "WARNING: zsh is not installed..."
-fi
-
