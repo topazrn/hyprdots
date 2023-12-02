@@ -62,3 +62,27 @@ nvidia_detect()
         return 1
     fi
 }
+
+amd_detect()
+{
+    if [ `lspci -k | grep -A 2 -E "(VGA|3D)" | grep -i amd | wc -l` -gt 0 ]
+    then
+        #echo "amd card detected..."
+        return 0
+    else
+        #echo "amd card not detected..."
+        return 1
+    fi
+}
+
+apple_detect()
+{
+    if [ `lspci -k | grep -A 2 -E "Apple" | wc -l` -gt 0 ]
+    then
+        #echo "apple detected..."
+        return 0
+    else
+        #echo "apple not detected..."
+        return 1
+    fi
+}
