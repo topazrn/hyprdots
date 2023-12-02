@@ -53,7 +53,7 @@ if pkg_installed grub2-common
             sudo sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/c\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet splash nvidia_drm.modeset=1\"" /etc/default/grub
         fi
 
-        sudo echo "GRUB_THEME=\"/usr/share/grub/themes/pochita/theme.txt\"" >> /etc/default/grub
+        sudo sh -c "echo 'GRUB_THEME=\"/usr/share/grub/themes/pochita/theme.txt\"' >> /etc/default/grub"
 
         sudo cp /etc/grub2-efi.cfg /etc/grub2-efi.cfg.backup
         sudo grub2-mkconfig -o /etc/grub2-efi.cfg
