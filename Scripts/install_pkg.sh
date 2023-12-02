@@ -52,10 +52,10 @@ fi
 pip install pyamdgpuinfo
 
 # oh-my-zsh-git
-ZSH=/usr/share/oh-my-zsh sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+ZSH=/usr/share/oh-my-zsh sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # zsh-theme-powerlevel10k-git
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /usr/share/zsh-theme-powerlevel10k/
+sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /usr/share/zsh-theme-powerlevel10k/
 
 # pokemon-colorscropts
 git clone https://gitlab.com/phoneybadger/pokemon-colorscripts.git
