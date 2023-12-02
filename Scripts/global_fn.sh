@@ -27,7 +27,7 @@ pkg_installed()
 {
     local PkgIn=$1
 
-    if pacman -Qi $PkgIn &> /dev/null
+    if dnf info installed $PkgIn &> /dev/null
     then
         #echo "${PkgIn} is already installed..."
         return 0
@@ -41,38 +41,12 @@ pkg_available()
 {
     local PkgIn=$1
 
-    if pacman -Si $PkgIn &> /dev/null
+    if dnf info $PkgIn &> /dev/null
     then
         #echo "${PkgIn} available in arch repo..."
         return 0
     else
         #echo "${PkgIn} not available in arch repo..."
-        return 1
-    fi
-}
-
-chk_aurh()
-{
-    if pkg_installed yay
-    then
-        aurhlpr="yay"
-    elif pkg_installed paru
-    then
-        aurhlpr="paru"
-    fi
-}
-
-aur_available()
-{
-    local PkgIn=$1
-    chk_aurh
-
-    if $aurhlpr -Si $PkgIn &> /dev/null
-    then
-        #echo "${PkgIn} available in aur repo..."
-        return 0
-    else
-        #echo "aur helper is not installed..."
         return 1
     fi
 }

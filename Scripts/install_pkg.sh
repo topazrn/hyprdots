@@ -13,26 +13,11 @@ fi
 if ! pkg_installed git
     then
     echo "installing dependency git..."
-    sudo pacman -S git
+    sudo dnf install git
 fi
 
-chk_aurh
-
-if [ -z $aurhlpr ]
-    then
-    echo -e "Select aur helper:\n1) yay\n2) paru"
-    read -p "Enter option number : " aurinp
-
-    case $aurinp in
-    1) aurhlpr="yay" ;;
-    2) aurhlpr="paru" ;;
-    *) echo -e "...Invalid option selected..."
-        exit 1 ;;
-    esac
-
-    echo "installing dependency $aurhlpr..."
-    ./install_aur.sh $aurhlpr 2>&1
-fi
+echo "installing copr..."
+./install_copr.sh
 
 install_list="${1:-install_pkg.lst}"
 
@@ -49,27 +34,31 @@ do
 
     elif pkg_available ${pkg}
         then
-        echo "queueing ${pkg} from arch repo..."
-        pkg_arch=`echo $pkg_arch ${pkg}`
-
-    elif aur_available ${pkg}
-        then
-        echo "queueing ${pkg} from aur..."
-        pkg_aur=`echo $pkg_aur ${pkg}`
+        echo "queueing ${pkg} from dnf..."
+        pkg_dnf=`echo $pkg_dnf ${pkg}`
 
     else
         echo "error: unknown package ${pkg}..."
     fi
 done < <( cut -d '#' -f 1 $install_list )
 
-if [ `echo $pkg_arch | wc -w` -gt 0 ]
+if [ `echo $pkg_dnf | wc -w` -gt 0 ]
     then
-    echo "installing $pkg_arch from arch repo..."
-    sudo pacman ${use_default} -S $pkg_arch
+    echo "installing $pkg_dnf from dnf..."
+    sudo dnf ${use_default} install $pkg_dnf
 fi
 
-if [ `echo $pkg_aur | wc -w` -gt 0 ]
-    then
-    echo "installing $pkg_aur from aur..."
-    $aurhlpr ${use_default} -S $pkg_aur
-fi
+# python-pyamdgpuinfo
+pip install pyamdgpuinfo
+
+# oh-my-zsh-git
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
+
+# zsh-theme-powerlevel10k-git
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+# pokemon-colorscropts
+git clone https://gitlab.com/phoneybadger/pokemon-colorscripts.git
+cd pokemon-colorscripts
+sudo ./install.sh
+cd ..
