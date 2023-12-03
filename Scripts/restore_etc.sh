@@ -51,14 +51,17 @@ if pkg_installed grub2-common
 
         if nvidia_detect
             then
-            sudo sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/c\GRUB_CMDLINE_LINUX_DEFAULT=\"rootflags=subvol=root loglevel=3 quiet splash nvidia_drm.modeset=1\"" /etc/default/grub
+            sudo sed -i "s/^\(GRUB_CMDLINE_LINUX=\".*\)\(\"\)$/\1 nvidia_drm.modeset=1\2/" /etc/default/grub
+            sudo sed -i "s/^\(GRUB_CMDLINE_LINUX_DEFAULT=\".*\)\(\"\)$/\1 nvidia_drm.modeset=1\2/" /etc/default/grub
         fi
 
         if apple_detect
             then
-            sudo sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/c\GRUB_CMDLINE_LINUX_DEFAULT=\"rootflags=subvol=root loglevel=3 quiet splash apple_dcp.show_notch=1\"" /etc/default/grub
+            sudo sed -i "s/^\(GRUB_CMDLINE_LINUX=\".*\)\(\"\)$/\1 apple_dcp.show_notch=1\2/" /etc/default/grub
+            sudo sed -i "s/^\(GRUB_CMDLINE_LINUX_DEFAULT=\".*\)\(\"\)$/\1 apple_dcp.show_notch=1\2/" /etc/default/grub
         fi
 
+        sudo sed -i "/^GRUB_TERMINAL_OUTPUT/d" /etc/default/grub
         sudo sh -c "echo 'GRUB_THEME=\"/usr/share/grub/themes/pochita/theme.txt\"' >> /etc/default/grub"
 
         sudo cp /etc/grub2.cfg /etc/grub2.cfg.backup
