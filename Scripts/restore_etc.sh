@@ -63,7 +63,6 @@ if pkg_installed grub2-common
 
         sudo cp /etc/grub2.cfg /etc/grub2.cfg.backup
         sudo grub2-mkconfig -o /etc/grub2.cfg
-        sudo sh -c "cat /etc/grub2.cfg > /etc/grub2-efi.cfg"
     fi
 
 else
