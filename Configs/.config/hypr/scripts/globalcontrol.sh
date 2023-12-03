@@ -27,7 +27,7 @@ pkg_installed()
 {
     local PkgIn=$1
 
-    if apt info nstalled $PkgIn &> /dev/null
+    if apt info installed $PkgIn &> /dev/null
     then
         #echo "${PkgIn} is already installed..."
         return 0
