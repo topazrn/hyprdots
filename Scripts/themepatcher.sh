@@ -20,7 +20,7 @@ if [[ -z $1 || -z $2 ]]; then ask_help ; exit 1 ; fi
 
 # set parameters
 Fav_Theme="$1"
-ThemeCtl="$HOME/.config/hypr/theme.ctl"
+ThemeCtl="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/theme.ctl"
 
 if [ -d "$2" ]; then
     Theme_Dir="$2"
@@ -93,10 +93,10 @@ fi
 # extract arcs
 prefix=("Gtk" "Font" "Icon" "Cursor")
 declare -A TrgtDir
-TrgtDir["Gtk"]="$HOME/.themes"                #mandatory
-TrgtDir["Font"]="$HOME/.local/share/fonts"    #optional
-TrgtDir["Icon"]="$HOME/.icons"                #optional
-TrgtDir["Cursor"]="$HOME/.icons"              #optional
+TrgtDir["Gtk"]="$HOME/.themes"                                  #mandatory
+TrgtDir["Font"]="${XDG_DATA_HOME:-$HOME/.local/share}/fonts"    #optional
+TrgtDir["Icon"]="$HOME/.icons"                                  #optional
+TrgtDir["Cursor"]="$HOME/.icons"                                #optional
 postfx=("tar.xz" "tar.gz")
 GtkFlag=0
 
@@ -124,13 +124,13 @@ fc-cache -f
 
 # generate restore_cfg control
 cat << THEME > "${Fav_Theme}restore_cfg.lst"
-Y|${HOME}/.config/hypr/themes|${Fav_Theme}.conf|hyprland
-Y|${HOME}/.config/kitty/themes|${Fav_Theme}.conf|kitty
-Y|${HOME}/.config/Kvantum|${Fav_Theme}|kvantum
-Y|${HOME}/.config/qt5ct/colors|${Fav_Theme}.conf|qt5ct
-Y|${HOME}/.config/rofi/themes|${Fav_Theme}.rasi|rofi
-N|${HOME}/.config/swww|${Fav_Theme}|swww
-Y|${HOME}/.config/waybar/themes|${Fav_Theme}.css|waybar
+Y|Y|${HOME}/.config/hypr/themes|${Fav_Theme}.conf|hyprland
+Y|Y|${HOME}/.config/kitty/themes|${Fav_Theme}.conf|kitty
+Y|Y|${HOME}/.config/Kvantum|${Fav_Theme}|kvantum
+Y|Y|${HOME}/.config/qt5ct/colors|${Fav_Theme}.conf|qt5ct
+Y|Y|${HOME}/.config/rofi/themes|${Fav_Theme}.rasi|rofi
+Y|N|${HOME}/.config/swww|${Fav_Theme}|swww
+Y|Y|${HOME}/.config/waybar/themes|${Fav_Theme}.css|waybar
 THEME
 
 if ! grep -q "|${Fav_Theme}|" "${ThemeCtl}" ; then 
