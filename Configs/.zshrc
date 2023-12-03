@@ -9,10 +9,10 @@ plugins=()
 source $ZSH/oh-my-zsh.sh
 
 # Helpful aliases
-alias  l='eza -lh  --icons=auto' # long list
-alias ls='eza -1   --icons=auto' # short list
-alias ll='eza -lha --icons=auto --sort=name --group-directories-first' # long list all
-alias ld='eza -lhD --icons=auto' # long list dirs
+alias  l='eza -lh  --icons' # long list
+alias ls='eza -1   --icons' # short list
+alias ll='eza -lha --icons --sort=name --group-directories-first' # long list all
+alias ld='eza -lhD --icons' # long list dirs
 alias vc='code' # gui code editor
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
