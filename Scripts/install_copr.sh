@@ -21,14 +21,22 @@ else
     # cliphist
     case $(uname -m) in
         x86_64) 
-            cliphistarch="amd64" ;;
+            sudo wget "https://github.com/sentriz/cliphist/releases/download/v0.4.0/v0.4.0-linux-amd64" -O "/usr/bin/cliphist"
+            sudo chmod +x /usr/bin/cliphist
+            ;;
         aarch64) 
-            cliphistarch="arm" ;;
+            mkdir cliphist
+            cd cliphist
+            wget -O "cliphist.pkg.tar.xz" "http://mirror.archlinuxarm.org/aarch64/extra/cliphist-1:0.4.0-2-aarch64.pkg.tar.xz"
+            tar -xf cliphist.pkg.tar.xz
+            sudo install -Dm0755 -t "/usr/bin/" "usr/bin/cliphist"
+            cd ..
+            rm -rf cliphist 
+            ;;
         *)
-            cliphistarch="386" ;;
+            echo "TODO: install cliphist for other archs"
+            ;;
     esac
-    sudo wget "https://github.com/sentriz/cliphist/releases/download/v0.4.0/v0.4.0-linux-$cliphistarch" -O /usr/bin/cliphist
-    sudo chmod +x /usr/bin/cliphist
 
     # vscode
     sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
