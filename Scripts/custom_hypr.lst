@@ -9,6 +9,8 @@ network-manager-applet
 bluez
 bluez-libs
 blueman
+python3-cairo
+python3-gobject
 sddm
 qt5-qtwayland
 qt6-qtwayland
