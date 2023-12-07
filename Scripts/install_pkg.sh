@@ -45,7 +45,7 @@ done < <( cut -d '#' -f 1 $install_list )
 if [ `echo $pkg_dnf | wc -w` -gt 0 ]
     then
     echo "installing $pkg_dnf from dnf..."
-    sudo dnf install -y $pkg_dnf
+    sudo dnf install ${use_default} $pkg_dnf
 fi
 
 # python-pyamdgpuinfo
