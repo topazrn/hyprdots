@@ -6,7 +6,7 @@ if [ ! -f /etc/fedora-release ] ; then
 fi
 
 # source variables
-ScrDir=`dirname $(realpath $0)`
+ScrDir=`dirname "$(realpath "$0")"`
 source $ScrDir/globalcontrol.sh
 
 # Check for updates
