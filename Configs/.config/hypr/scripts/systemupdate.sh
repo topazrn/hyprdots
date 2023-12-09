@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Check release
-if [ ! -f /etc/arch-release ] ; then
+if [ ! -f /etc/fedora-release ] ; then
     exit 0
 fi
 

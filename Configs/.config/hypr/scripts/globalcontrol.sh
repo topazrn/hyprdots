@@ -22,12 +22,12 @@ hypr_width=`hyprctl -j getoption general:border_size | jq '.int'`
 #    ncolor="-h string:bgcolor:#f4ede8 -h string:fgcolor:#9893a5 -h string:frcolor:#908caa"
 #fi
 
-# pacman fns
+# dnf fns
 pkg_installed()
 {
     local PkgIn=$1
 
-    if apt info installed $PkgIn &> /dev/null
+    if dnf info installed $PkgIn &> /dev/null
     then
         #echo "${PkgIn} is already installed..."
         return 0
