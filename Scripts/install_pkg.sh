@@ -88,7 +88,8 @@ cd ..
 sudo rm -rf ohmyzsh
 
 # zsh-theme-powerlevel10k-git
-sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /usr/share/zsh-theme-powerlevel10k/
+sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /tmp/zsh-theme-powerlevel10k/
+sudo mv /tmp/zsh-theme-powerlevel10k /usr/share/zsh-theme-powerlevel10k/
 
 # pokemon-colorscropts
 git clone https://gitlab.com/phoneybadger/pokemon-colorscripts.git
