@@ -1,53 +1,88 @@
-pipewire
-pipewire-alsa
-pipewire-jack-audio-connection-kit
-pipewire-pulseaudio
-pipewire-gstreamer
-wireplumber
-networkmanager
-network-manager-applet
-bluez
-bluez-libs
-blueman
-python3-cairo
-python3-gobject
-sddm
-qt5-qtwayland
-qt6-qtwayland
-qt5-qtquickcontrols
-qt5-qtquickcontrols2
-qt5-qtgraphicaleffects
-hyprland
-dunst
-rofi-wayland
-waybar
-swww
-swaylock-effects
-wlogout
-slurp
-swappy
-polkit-kde
-xdg-desktop-portal-hyprland
-python3
-python3-pip
-parallel
-jq
-ImageMagick
-qt5-qtimageformats
-ffmpegthumbs
-kde-cli-tools
-brightnessctl
-pavucontrol
-pamixer
-nwg-look
-kvantum
-qt5ct
-firefox
-kitty
-neofetch
-dolphin
-code
-vim-minimal
-ark
-zsh
-eza
+# --------------------------------------------------- // System
+pipewire                                               # audio/video server
+pipewire-alsa                                          # pipewire alsa client
+pipewire-audio                                         # pipewire audio client
+pipewire-jack-audio-connection-kit                     # pipewire jack client
+pipewire-pulseaudio                                    # pipewire pulseaudio client
+pipewire-gstreamer                                     # pipewire gstreamer client
+wireplumber                                            # pipewire session manager
+pavucontrol                                            # pulseaudio volume control
+pamixer                                                # pulseaudio cli mixer
+networkmanager                                         # network manager
+network-manager-applet                                 # network manager system tray utility
+bluez                                                  # bluetooth protocol stack
+bluez-libs                                             # bluetooth utility cli
+python3                                                # required for blueman
+python3-pip                                            # required for blueman
+python3-cairo                                          # required for blueman
+python3-gobject                                        # required for blueman
+blueman                                                # bluetooth manager gui
+brightnessctl                                          # screen brightness control
+
+
+# --------------------------------------------------- // Display Manager
+sddm                                                   # display manager for KDE plasma
+qt5-qtquickcontrols                                    # for sddm theme ui elements
+qt5-qtquickcontrols2                                   # for sddm theme ui elements
+qt5-qtgraphicaleffects                                 # for sddm theme effects
+
+
+# --------------------------------------------------- // Window Manager
+hyprland                                               # wlroots-based wayland compositor
+dunst                                                  # notification daemon
+rofi-wayland                                           # application launcher
+waybar                                                 # system bar
+swww                                                   # wallpaper
+swaylock-effects                                       # lock screen
+wlogout                                                # logout menu
+# grimblast-git                                          # screenshot tool
+# hyprpicker-git                                         # color picker
+slurp                                                  # region select for screenshot/screenshare
+swappy                                                 # screenshot editor
+# cliphist                                               # clipboard manager
+
+
+# --------------------------------------------------- // Dependencies
+polkit-kde                                             # authentication agent
+xdg-desktop-portal-hyprland                            # xdg desktop portal for hyprland
+# pacman-contrib                                         # for system update check
+# python-pyamdgpuinfo                                    # for amd gpu info
+parallel                                               # for parallel processing
+jq                                                     # for json processing
+ImageMagick                                            # for image processing
+qt5-qtimageformats                                     # for dolphin image thumbnails
+ffmpegthumbs                                           # for dolphin video thumbnails
+kde-cli-tools                                          # for dolphin file type defaults
+
+
+# --------------------------------------------------- // Theming
+nwg-look                                               # gtk configuration tool
+qt5ct                                                  # qt5 configuration tool
+qt6ct                                                  # qt6 configuration tool
+kvantum                                                # svg based qt theme engine
+qt5-wayland                                            # wayland support in qt5
+qt6-wayland                                            # wayland support in qt6
+
+
+# --------------------------------------------------- // Applications
+firefox                                                # browser
+kitty                                                  # terminal
+dolphin                                                # kde file manager
+ark                                                    # kde file archiver
+vim-minimal                                            # terminal text editor
+code                                                   # ide text editor
+
+
+# --------------------------------------------------- // Shell
+eza|zsh                                                # file lister for zsh
+# oh-my-zsh-git|zsh                                      # plugin manager for zsh
+# zsh-theme-powerlevel10k|zsh oh-my-zsh-git              # theme for zsh
+lsd|fish                                               # file lister for fish
+# starship|fish                                          # customizable shell prompt
+neofetch                                               # fetch tool
+# pokemon-colorscripts-git|zsh                           # display pokemon sprites
+
+
+# --------------------------------------------------- // Hyprdots
+# hyprdots-ctl                                           # cli tool to manage hyprdots
+

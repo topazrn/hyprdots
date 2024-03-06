@@ -1,45 +1,46 @@
 #!/usr/bin/env sh
 
+
 # set variables
 ScrDir=`dirname "$(realpath "$0")"`
 source "${ScrDir}/globalcontrol.sh"
+readarray -t theme_ctl < <( cut -d '|' -f 2 $ThemeCtl )
+
+
+# define functions
+Theme_Change()
+{
+    local x_switch=$1
+    local curTheme=$(awk -F '|' '$1 == 1 {print $2}' $ThemeCtl)
+    for (( i=0 ; i<${#theme_ctl[@]} ; i++ ))
+    do
+        if [ "${theme_ctl[i]}" == "${curTheme}" ] ; then
+            if [ $x_switch == 'n' ] ; then
+                nextIndex=$(( (i + 1) % ${#theme_ctl[@]} ))
+            elif [ $x_switch == 'p' ] ; then
+                nextIndex=$(( i - 1 ))
+            fi
+            ThemeSet="${theme_ctl[nextIndex]}"
+            break
+        fi
+    done
+}
 
 
 # evaluate options
-while getopts "npst" option ; do
+while getopts "nps:t" option ; do
     case $option in
 
     n ) # set next theme
-        ThemeSet=`head -1 "$ThemeCtl" | cut -d '|' -f 2` #default value
-        flg=0
-        while read line
-        do
-            if [ $flg -eq 1 ] ; then
-                ThemeSet=`echo $line | cut -d '|' -f 2`
-                break
-            elif [ `echo $line | cut -d '|' -f 1` -eq 1 ] ; then
-                flg=1
-            fi
-        done < "$ThemeCtl"
+        Theme_Change n
         export xtrans="grow" ;;
 
     p ) # set previous theme
-        ThemeSet=`tail -1 "$ThemeCtl" | cut -d '|' -f 2` #default value
-        flg=0
-        while read line
-        do
-            if [ $flg -eq 1 ] ; then
-                ThemeSet=`echo $line | cut -d '|' -f 2`
-                break
-            elif [ `echo $line | cut -d '|' -f 1` -eq 1 ] ; then
-                flg=1
-            fi
-        done < <( tac "$ThemeCtl" )
+        Theme_Change p
         export xtrans="outer" ;;
 
     s ) # set selected theme
-        shift $((OPTIND -1))
-        ThemeSet=$1 ;;
+        ThemeSet="$OPTARG" ;;
 
     t ) # display tooltip
         echo ""
@@ -100,6 +101,10 @@ ln -fs $ConfDir/kitty/themes/${ThemeSet}.conf $ConfDir/kitty/themes/theme.conf
 killall -SIGUSR1 kitty
 
 
+# rofi
+cp $ConfDir/rofi/themes/${ThemeSet}.rasi $ConfDir/rofi/themes/theme.rasi
+
+
 # kvantum QT
 kvantummanager --set "${ThemeSet}"
 
@@ -108,6 +113,11 @@ kvantummanager --set "${ThemeSet}"
 sed -i "/^color_scheme_path=/c\color_scheme_path=$ConfDir/qt5ct/colors/${ThemeSet}.conf" $ConfDir/qt5ct/qt5ct.conf
 IconSet=`awk -F "'" '$0 ~ /gsettings set org.gnome.desktop.interface icon-theme/{print $2}' $ConfDir/hypr/themes/${ThemeSet}.conf`
 sed -i "/^icon_theme=/c\icon_theme=${IconSet}" $ConfDir/qt5ct/qt5ct.conf
+
+
+# qt6ct
+sed -i "/^color_scheme_path=/c\color_scheme_path=$ConfDir/qt6ct/colors/${ThemeSet}.conf" $ConfDir/qt6ct/qt6ct.conf
+sed -i "/^icon_theme=/c\icon_theme=${IconSet}" $ConfDir/qt6ct/qt6ct.conf
 
 
 # gtk3

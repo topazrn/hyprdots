@@ -63,6 +63,7 @@ config=( #!Hard Coded here to atleast Strictly meet requirements.
   ".config/Kvantum/$Fav_Theme/$Fav_Theme.kvconfig"
   ".config/Kvantum/$Fav_Theme/$Fav_Theme.svg"
   ".config/qt5ct/colors/$Fav_Theme.conf"
+  ".config/qt6ct/colors/$Fav_Theme.conf"
   ".config/rofi/themes/$Fav_Theme.rasi"
   ".config/swww/$Fav_Theme/"
   ".config/waybar/themes/$Fav_Theme.css"
@@ -128,12 +129,15 @@ Y|Y|${HOME}/.config/hypr/themes|${Fav_Theme}.conf|hyprland
 Y|Y|${HOME}/.config/kitty/themes|${Fav_Theme}.conf|kitty
 Y|Y|${HOME}/.config/Kvantum|${Fav_Theme}|kvantum
 Y|Y|${HOME}/.config/qt5ct/colors|${Fav_Theme}.conf|qt5ct
+Y|Y|${HOME}/.config/qt6ct/colors|${Fav_Theme}.conf|qt6ct
 Y|Y|${HOME}/.config/rofi/themes|${Fav_Theme}.rasi|rofi
 Y|N|${HOME}/.config/swww|${Fav_Theme}|swww
 Y|Y|${HOME}/.config/waybar/themes|${Fav_Theme}.css|waybar
 THEME
 
-if ! grep -q "|${Fav_Theme}|" "${ThemeCtl}" ; then 
+if grep -q "^.|${Fav_Theme}|" "${ThemeCtl}" ; then
+    awk -F '|' -v thm="${Fav_Theme}" -v cde="$3" '{OFS=FS} $2 == thm {$3 = cde} {print}' "${ThemeCtl}" > tmp && mv tmp "${ThemeCtl}"
+else
     echo "0|${Fav_Theme}|${3}|~/.config/swww/${Fav_Theme}/${WallSet}" >> "${ThemeCtl}"
 fi
 

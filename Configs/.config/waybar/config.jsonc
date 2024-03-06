@@ -14,15 +14,16 @@
 
 // positions generated based on config.ctl //
 
-	"modules-left": ["custom/padd","custom/l_end","custom/power","custom/cliphist","custom/wbar","custom/mode","custom/wallchange","custom/r_end","custom/l_end","wlr/taskbar","custom/spotify","custom/r_end","","custom/padd"],
+	"modules-left": ["custom/padd","custom/l_end","custom/power","custom/cliphist","custom/wbar","custom/theme","custom/wallchange","custom/r_end","custom/l_end","wlr/taskbar","custom/spotify","custom/r_end","","custom/padd"],
 	"modules-center": ["custom/padd","custom/l_end","idle_inhibitor","clock","custom/r_end","custom/padd"],
-	"modules-right": ["custom/padd","custom/l_end","tray","battery","custom/r_end","custom/l_end","backlight","network","bluetooth","pulseaudio","pulseaudio#microphone","custom/r_end","custom/padd"],
+	"modules-right": ["custom/padd","custom/l_end","tray","battery","custom/r_end","custom/l_end","backlight","network","bluetooth","pulseaudio","pulseaudio#microphone","custom/keybindhint","custom/r_end","custom/padd"],
 
 
 // sourced from modules based on config.ctl //
 
     "custom/power": {
         "format": "{}",
+        "rotate": 0,
         "exec": "echo ; echo  logout",
         "on-click": "~/.config/hypr/scripts/logoutlaunch.sh 2",
         "interval" : 86400, // once every day
@@ -31,6 +32,7 @@
 
     "custom/cliphist": {
         "format": "{}",
+        "rotate": 0,
         "exec": "echo ; echo 󰅇 clipboard history",
         "on-click": "sleep 0.1 && ~/.config/hypr/scripts/cliphist.sh c",
         "on-click-right": "sleep 0.1 && ~/.config/hypr/scripts/cliphist.sh d",
@@ -41,7 +43,8 @@
 
     "custom/wbar": {
         "format": "{}", //    //
-        "exec": "echo ; echo  switch menubar //  dock",
+        "rotate": 0,
+        "exec": "echo ; echo  switch bar //  dock",
         "on-click": "~/.config/hypr/scripts/wbarconfgen.sh n",
         "on-click-right": "~/.config/hypr/scripts/wbarconfgen.sh p",
         "on-click-middle": "sleep 0.1 && ~/.config/hypr/scripts/quickapps.sh kitty firefox spotify code dolphin",
@@ -49,9 +52,10 @@
         "tooltip": true
     },
 
-    "custom/mode": {
+    "custom/theme": {
         "format": "{}",
-        "exec": "echo ; echo 󰟡 switch mode",
+        "rotate": 0,
+        "exec": "echo ; echo 󰟡 switch theme",
         "on-click": "~/.config/hypr/scripts/themeswitch.sh -n",
         "on-click-right": "~/.config/hypr/scripts/themeswitch.sh -p",
         "on-click-middle": "sleep 0.1 && ~/.config/hypr/scripts/themeselect.sh",
@@ -61,6 +65,7 @@
 
     "custom/wallchange": {
         "format": "{}",
+        "rotate": 0,
         "exec": "echo ; echo 󰆊 switch wallpaper",
         "on-click": "~/.config/hypr/scripts/swwwallpaper.sh -n",
         "on-click-right": "~/.config/hypr/scripts/swwwallpaper.sh -p",
@@ -71,6 +76,7 @@
 
 	"wlr/taskbar": {
 		"format": "{icon}",
+		"rotate": 0,
 		"icon-size": 18,
 		"icon-theme": "Tela-circle-dracula",
         "spacing": 0,
@@ -88,18 +94,21 @@
     "custom/spotify": {
         "exec": "/usr/bin/python3 /home/tittu/.config/waybar/modules/mediaplayer.py --player spotify",
         "format": " {}",
+        "rotate": 0,
         "return-type": "json",
         "on-click": "playerctl play-pause --player spotify",
-	"on-click-right": "playerctl next --player spotify",
-	"on-click-middle": "playerctl previous --player spotify",
-	"on-scroll-up": "~/.config/hypr/scripts/spotifyvolumecontrol.sh up",
-	"on-scroll-down": "~/.config/hypr/scripts/spotifyvolumecontrol.sh down",
-	"max-length": 25,
-        "escape": true
+        "on-click-right": "playerctl next --player spotify",
+        "on-click-middle": "playerctl previous --player spotify",
+        "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh -p spotify i",
+        "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh -p spotify d",
+        "max-length": 25,
+        "escape": true,
+        "tooltip": true
     },
 
     "idle_inhibitor": {
         "format": "{icon}",
+        "rotate": 0,
         "format-icons": {
             "activated": "󰥔",
             "deactivated": ""
@@ -108,6 +117,7 @@
 
     "clock": {
         "format": "{:%I:%M %p}",
+        "rotate": 0,
         "format-alt": "{:%R 󰃭 %d·%m·%y}",
         "tooltip-format": "<tt>{calendar}</tt>",
         "calendar": {
@@ -132,6 +142,7 @@
 
     "tray": {
         "icon-size": 18,
+        "rotate": 0,
         "spacing": 5
     },
 
@@ -142,6 +153,7 @@
             "critical": 20
         },
         "format": "{icon} {capacity}%",
+        "rotate": 0,
         "format-charging": " {capacity}%",
         "format-plugged": " {capacity}%",
         "format-alt": "{time} {icon}",
@@ -150,6 +162,7 @@
 
     "backlight": {
         "device": "intel_backlight",
+        "rotate": 0,
         "format": "{icon} {percent}%",
         "format-icons": ["", "", "", "", "", "", "", "", ""],
         "on-scroll-up": "brightnessctl set 1%+",
@@ -158,27 +171,36 @@
     },
 
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "󰤨 {essid}",
-        "format-ethernet": "󱘖 Wired",
-        "tooltip-format": "󱘖 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}",
-        "format-linked": "󱘖 {ifname} (No IP)",
-        "format-disconnected": " Disconnected",
-        "format-alt": "󰤨 {signalStrength}%",
-        "interval": 5
+        "tooltip": true,
+        "format-wifi": " ",
+        "rotate": 0,
+        "format-ethernet": "󰈀 ",
+        "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+        "format-linked": "󰈀 {ifname} (No IP)",
+        "format-disconnected": "󰖪 ",
+        "tooltip-format-disconnected": "Disconnected",
+        "format-alt": "<span foreground='#99ffdd'> {bandwidthDownBytes}</span> <span foreground='#ffcc66'> {bandwidthUpBytes}</span>",
+        "interval": 2,
     },
 
     "bluetooth": {
         "format": "",
-        "format-disabled": "", // an empty format will hide the module
+        "rotate": 0,
+        "format-disabled": "",
         "format-connected": " {num_connections}",
-        "tooltip-format": " {device_alias}",
-        "tooltip-format-connected": "{device_enumerate}",
-        "tooltip-format-enumerate-connected": " {device_alias}"
+        "format-connected-battery": "{icon} {num_connections}",
+        // "format-connected-battery": "{icon} {device_alias}-{device_battery_percentage}%",
+        "format-icons": ["󰥇", "󰤾", "󰤿", "󰥀", "󰥁", "󰥂", "󰥃", "󰥄", "󰥅", "󰥆", "󰥈"],
+        // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device If this config option is not defined or none of the devices in the list are connected, it will fall back to showing the last connected device.
+        "tooltip-format": "{controller_alias}\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{icon} {device_battery_percentage}%"
     },
 
     "pulseaudio": {
         "format": "{icon} {volume}",
+        "rotate": 0,
         "format-muted": "婢",
         "on-click": "pavucontrol -t 3",
         "on-click-middle": "~/.config/hypr/scripts/volumecontrol.sh -o m",
@@ -199,6 +221,7 @@
 
     "pulseaudio#microphone": {
         "format": "{format_source}",
+        "rotate": 0,
         "format-source": "",
         "format-source-muted": "",
         "on-click": "pavucontrol -t 4",
@@ -207,6 +230,12 @@
         "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh -i d",
         "tooltip-format": "{format_source} {source_desc} // {source_volume}%",
         "scroll-step": 5
+    },
+
+    "custom/keybindhint": {
+        "format": " ",
+        "rotate": 0,
+        "on-click": "Hyprdots show binds",
     },
 
 

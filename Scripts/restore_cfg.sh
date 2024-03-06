@@ -83,6 +83,6 @@ if nvidia_detect && [ $(grep '^source = ~/.config/hypr/nvidia.conf' ${HOME}/.con
     echo -e 'source = ~/.config/hypr/nvidia.conf # auto sourced vars for nvidia\n' >> ${HOME}/.config/hypr/hyprland.conf
 fi
 
-./create_cache.sh
-./restore_lnk.sh
+./create_cache.sh "${ThemeOverride}"
+[ -z "${ThemeOverride}" ] && ./restore_lnk.sh
 
