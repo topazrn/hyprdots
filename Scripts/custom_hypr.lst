@@ -1,8 +1,7 @@
 # --------------------------------------------------- // System
 pipewire                                               # audio/video server
 pipewire-alsa                                          # pipewire alsa client
-pipewire-audio                                         # pipewire audio client
-pipewire-jack-audio-connection-kit                     # pipewire jack client
+pipewire-jack-audio-connection-kit                     # pipewire jack and audio client
 pipewire-pulseaudio                                    # pipewire pulseaudio client
 pipewire-gstreamer                                     # pipewire gstreamer client
 wireplumber                                            # pipewire session manager
