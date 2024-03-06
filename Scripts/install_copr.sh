@@ -27,7 +27,7 @@ else
         aarch64) 
             mkdir cliphist
             cd cliphist
-            wget -O "cliphist.pkg.tar.xz" "http://mirror.archlinuxarm.org/aarch64/extra/cliphist-1:0.4.0-2-aarch64.pkg.tar.xz"
+            wget -O "cliphist.pkg.tar.xz" "http://mirror.archlinuxarm.org/aarch64/extra/cliphist-1:0.5.0-1-aarch64.pkg.tar.xz"
             tar -xf cliphist.pkg.tar.xz
             sudo install -Dm0755 -t "/usr/bin/" "usr/bin/cliphist"
             cd ..
