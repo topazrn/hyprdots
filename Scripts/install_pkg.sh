@@ -58,7 +58,7 @@ do
         then
         repo=$(dnf info --available ${pkg} | awk -F ': ' '/Repository / {print $2}')
         echo -e "\033[0;32m[${repo}]\033[0m queueing ${pkg} from official dnf repo..."
-        pkg_dnf=`echo ${$pkg_dnf} ${pkg}`
+        pkg_dnf=`echo ${pkg_dnf} ${pkg}`
 
     else
         echo "error: unknown package ${pkg}..."
