@@ -91,13 +91,15 @@ if [ $flg_Install -eq 1 ]; then
 
 EOF
 
-    # Prepare package list
+    #----------------------#
+    # prepare package list #
+    #----------------------#
     shift $((OPTIND - 1))
     cust_pkg=$1
     cp custom_hypr.lst install_pkg.lst
 
     if [ -f "$cust_pkg" ] && [ ! -z "$cust_pkg" ]; then
-        cat "$cust_pkg" >>install_pkg.lst
+        cat $cust_pkg >>install_pkg.lst
     fi
 
     #-----------------------#
@@ -129,17 +131,14 @@ EOF
         done
         echo -e "\033[0;32m[GPU]\033[0m detected // ${nvga[@]}"
     else
-        echo "Nvidia card not detected, skipping Nvidia drivers..."
+        echo "nvidia card not detected, skipping nvidia drivers..."
     fi
 
-    # Install packages from the list
+    #--------------------------------#
+    # install packages from the list #
+    #--------------------------------#
     ./install_pkg.sh install_pkg.lst
     rm install_pkg.lst
-}
-
-# Function to restore configurations
-restore_configs() {
-    cat <<EOF
 
 fi
 
@@ -160,11 +159,6 @@ EOF
 
     ./restore_fnt.sh
     ./restore_cfg.sh
-}
-
-# Function to enable system services
-enable_services() {
-    cat <<EOF
 fi
 
 
@@ -200,7 +194,7 @@ if [ $flg_Service -eq 1 ]; then
 EOF
 
     while read service ; do
-        service_ctl "$service"
+        service_ctl $service
     done < system_ctl.lst
 fi
 
