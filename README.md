@@ -44,7 +44,7 @@ Checkout **Ksk**'s [video](https://www.youtube.com/watch?v=mb8h1-LB9K0) for full
 After a minimal Fedora install (with grub and systemd), clone and execute -
 
 ```shell
-sudo dnf install -y git wget tar
+sudo dnf install -y git wget tar pciutils
 git clone --depth 1 https://github.com/topazrn/hyprdots-fedora ~/Hyprdots
 cd ~/Hyprdots/Scripts
 ./install.sh
